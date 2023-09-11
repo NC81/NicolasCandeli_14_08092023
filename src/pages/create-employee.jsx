@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import Dropdown from '../components/dropdown'
 import ConfirmModal from '../components/confirm-modal'
 
 export default function CreateEmployee() {
@@ -28,22 +29,14 @@ export default function CreateEmployee() {
               <input id="city" type="text" />
               <label htmlFor="state">State</label>
               <select name="state" id="state">
-                <option>Alabama</option>
-                <option>Alaska</option>
-                <option>American Samoa</option>
-                <option>Arizona</option>
-                <option>Arkansas</option>
+                <Dropdown type="countryStates" />
               </select>
               <label htmlFor="zip-code">Zip Code</label>
-              <input id="zip-code" type="number" />
+              <input id="zip-code" type="number" minLength="5" />
             </fieldset>
             <label htmlFor="department">Department</label>
             <select name="department" id="department">
-              <option>Sales</option>
-              <option>Marketing</option>
-              <option>Engineering</option>
-              <option>Human Resources</option>
-              <option>Legal</option>
+              <Dropdown type="departments" />
             </select>
           </form>
         </div>
