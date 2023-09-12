@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import Dropdown from '../components/dropdown'
 import ConfirmModal from '../components/confirm-modal'
+import AntDatepicker from '../components/date-picker'
 
 export default function CreateEmployee() {
   return (
@@ -17,10 +18,10 @@ export default function CreateEmployee() {
             <input type="text" id="first-name" />
             <label htmlFor="last-name">Last Name</label>
             <input type="text" id="last-name" />
-            <label htmlFor="birth-date">Date of Birth</label>
-            <input type="date" id="birth-date" />
-            <label htmlFor="start-date">Start Date</label>
-            <input type="date" id="start-date" />
+            <label>Date of Birth</label>
+            <AntDatepicker className={'birth-date'} />
+            <label>Start Date</label>
+            <AntDatepicker className={'start-date'} />
             <fieldset className="address">
               <legend>Address</legend>
               <label htmlFor="street">Street</label>
