@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
-import employee from '../features/employee'
+import employees from '../features/employees'
 import user from '../features/user'
 
 export const store = configureStore({
-  reducer: { employee, user },
+  reducer: { employees, user },
 })
