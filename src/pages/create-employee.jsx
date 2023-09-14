@@ -1,22 +1,44 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { createEmployee } from '../features/employee'
+import { createEmployee } from '../features/employees'
+import { toggleModal, isModalOpenSelector } from '../features/user'
+import { departments, countryStates } from '../data/ui'
 import Dropdown from '../components/dropdown'
 import ConfirmModal from '../components/confirm-modal'
 import AntDatepicker from '../components/date-picker'
-import { toggleModal, isModalOpenSelector } from '../features/user'
+import ValidationBox from '../components/validation-box'
 
 export default function CreateEmployee() {
   const dispatch = useDispatch()
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
-  const [department, setDepartment] = useState('')
+  const [department, setDepartment] = useState(departments[0])
   const [street, setStreet] = useState('')
   const [city, setCity] = useState('')
-  const [state, setState] = useState('')
+  const [state, setState] = useState(countryStates[0].abbreviation)
   const [zipCode, setZipCode] = useState('')
   const isModalOpen = useSelector(isModalOpenSelector)
+
+  function handleSubmit(e) {
+    e.preventDefault()
+    const birthDateInput = document.querySelector('.birthDate input')
+    const startDateInput = document.querySelector('.startDate input')
+    dispatch(
+      createEmployee({
+        firstName: firstName,
+        lastName: lastName,
+        birthDate: birthDateInput.value,
+        startDate: startDateInput.value,
+        street: street,
+        city: city,
+        state: state,
+        zipCode: zipCode,
+        department: department,
+      })
+    )
+    dispatch(toggleModal(true))
+  }
 
   return (
     <>
@@ -27,7 +49,13 @@ export default function CreateEmployee() {
         <Link to="/list">View Current Employees</Link>
         <div>
           <h2>Create Employee</h2>
-          <form action="#" id="create-employee">
+          <form
+            onSubmit={(e) => {
+              handleSubmit(e)
+            }}
+            action="#"
+            id="create-employee"
+          >
             <label htmlFor="first-name">First Name</label>
             <input
               onChange={(e) => {
@@ -45,9 +73,9 @@ export default function CreateEmployee() {
               id="last-name"
             />
             <label>Date of Birth</label>
-            <AntDatepicker type="birthDate" className={'birth-date'} />
+            <AntDatepicker name="birthDate" />
             <label>Start Date</label>
-            <AntDatepicker type="startDate" className={'start-date'} />
+            <AntDatepicker name="startDate" />
             <fieldset className="address">
               <legend>Address</legend>
               <label htmlFor="street">Street</label>
@@ -96,23 +124,9 @@ export default function CreateEmployee() {
             >
               <Dropdown type="departments" />
             </select>
+            <ValidationBox firstName={firstName} lastName={lastName} />
           </form>
           <button
-            onClick={(e) => {
-              e.preventDefault()
-              dispatch(
-                createEmployee({
-                  firstName: firstName,
-                  lastName: lastName,
-                  department: department,
-                  street: street,
-                  city: city,
-                  state: state,
-                  zipCode: zipCode,
-                })
-              )
-              dispatch(toggleModal(true))
-            }}
             disabled={
               firstName.length >= 2 && lastName.length >= 2 ? false : true
             }

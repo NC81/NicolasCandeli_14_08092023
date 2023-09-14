@@ -65,3 +65,11 @@ label {
   background-color: white;
   cursor: pointer;
 }
+
+.text-valid {
+  color: green;
+}
+
+.text-invalid {
+  color: red;
+}
