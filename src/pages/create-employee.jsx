@@ -1,10 +1,11 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { createEmployee } from '../features/employee'
 import Dropdown from '../components/dropdown'
-// import ConfirmModal from '../components/confirm-modal'
+import ConfirmModal from '../components/confirm-modal'
 import AntDatepicker from '../components/date-picker'
+import { toggleModal, isModalOpenSelector } from '../features/user'
 
 export default function CreateEmployee() {
   const dispatch = useDispatch()
@@ -15,6 +16,7 @@ export default function CreateEmployee() {
   const [city, setCity] = useState('')
   const [state, setState] = useState('')
   const [zipCode, setZipCode] = useState('')
+  const isModalOpen = useSelector(isModalOpenSelector)
 
   return (
     <>
@@ -109,14 +111,19 @@ export default function CreateEmployee() {
                   zipCode: zipCode,
                 })
               )
+              dispatch(toggleModal(true))
             }}
+            disabled={
+              firstName.length >= 2 && lastName.length >= 2 ? false : true
+            }
             type="submit"
+            form="create-employee"
           >
             Save
           </button>
         </div>
       </main>
-      {/* <ConfirmModal /> */}
+      {isModalOpen && <ConfirmModal />}
     </>
   )
 }
