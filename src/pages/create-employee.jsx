@@ -5,7 +5,7 @@ import { createEmployee } from '../features/employees'
 import { toggleModal } from '../features/user'
 import { departments, countryStates } from '../data/ui'
 import Dropdown from '../components/dropdown'
-// import ConfirmModal from '../components/confirm-modal'
+import ConfirmModal from '../components/confirm-modal'
 import ValidationBox from '../components/validation-box'
 import { DatePicker } from 'antd'
 
@@ -167,7 +167,7 @@ export default function CreateEmployee() {
           </button>
         </div>
       </main>
-      {/* <ConfirmModal /> */}
+      <ConfirmModal />
     </>
   )
 }
