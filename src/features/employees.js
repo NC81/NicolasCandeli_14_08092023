@@ -4,13 +4,8 @@ const { actions, reducer } = createSlice({
   name: 'employees',
   initialState: [],
   reducers: {
-    createEmployee: {
-      prepare: (value) => ({
-        payload: value,
-      }),
-      reducer: (draft, action) => {
-        draft.push(action.payload)
-      },
+    createEmployee: (draft, action) => {
+      draft.push(action.payload)
     },
   },
 })

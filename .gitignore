@@ -18,8 +18,9 @@
 .env.test.local
 .env.production.local
 
-# jquery
+# dev
 /jquery
+test.html
 
 npm-debug.log*
 yarn-debug.log*

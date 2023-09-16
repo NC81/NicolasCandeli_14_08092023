@@ -1,35 +1,34 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { createEmployee } from '../features/employees'
-import { toggleModal, isModalOpenSelector } from '../features/user'
+import { toggleModal } from '../features/user'
 import { departments, countryStates } from '../data/ui'
 import Dropdown from '../components/dropdown'
-import ConfirmModal from '../components/confirm-modal'
-import AntDatepicker from '../components/date-picker'
+// import ConfirmModal from '../components/confirm-modal'
 import ValidationBox from '../components/validation-box'
+import { DatePicker } from 'antd'
 
 export default function CreateEmployee() {
   const dispatch = useDispatch()
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
-  const [department, setDepartment] = useState(departments[0])
   const [street, setStreet] = useState('')
   const [city, setCity] = useState('')
-  const [state, setState] = useState(countryStates[0].abbreviation)
   const [zipCode, setZipCode] = useState('')
-  const isModalOpen = useSelector(isModalOpenSelector)
+  const [birthDate, setBirthDate] = useState({ date: '', dateString: '' })
+  const [startDate, setStartDate] = useState({ date: '', dateString: '' })
+  const [department, setDepartment] = useState(departments[0])
+  const [state, setState] = useState(countryStates[0].abbreviation)
 
   function handleSubmit(e) {
     e.preventDefault()
-    const birthDateInput = document.querySelector('.birthDate input')
-    const startDateInput = document.querySelector('.startDate input')
     dispatch(
       createEmployee({
         firstName: firstName,
         lastName: lastName,
-        birthDate: birthDateInput.value,
-        startDate: startDateInput.value,
+        birthDate: birthDate.dateString,
+        startDate: startDate.dateString,
         street: street,
         city: city,
         state: state,
@@ -38,6 +37,15 @@ export default function CreateEmployee() {
       })
     )
     dispatch(toggleModal(true))
+    setFirstName('')
+    setLastName('')
+    setStreet('')
+    setCity('')
+    setZipCode('')
+    setBirthDate({ date: '', dateString: '' })
+    setStartDate({ date: '', dateString: '' })
+    setDepartment(departments[0])
+    setState(countryStates[0].abbreviation)
   }
 
   return (
@@ -61,6 +69,7 @@ export default function CreateEmployee() {
               onChange={(e) => {
                 setFirstName(e.target.value)
               }}
+              value={firstName}
               type="text"
               id="first-name"
             />
@@ -69,13 +78,30 @@ export default function CreateEmployee() {
               onChange={(e) => {
                 setLastName(e.target.value)
               }}
+              value={lastName}
               type="text"
               id="last-name"
             />
             <label>Date of Birth</label>
-            <AntDatepicker name="birthDate" />
+            <DatePicker
+              placeholder="Select date"
+              format="MM-DD-YYYY"
+              style={{ borderColor: 'black' }}
+              onChange={(date, dateString) => {
+                setBirthDate({ date: date, dateString: dateString })
+              }}
+              value={birthDate.date !== '' ? birthDate.date : null}
+            />
             <label>Start Date</label>
-            <AntDatepicker name="startDate" />
+            <DatePicker
+              placeholder="Select date"
+              format="MM-DD-YYYY"
+              style={{ borderColor: 'black' }}
+              onChange={(date, dateString) => {
+                setStartDate({ date: date, dateString: dateString })
+              }}
+              value={startDate.date !== '' ? startDate.date : null}
+            />{' '}
             <fieldset className="address">
               <legend>Address</legend>
               <label htmlFor="street">Street</label>
@@ -83,6 +109,7 @@ export default function CreateEmployee() {
                 onChange={(e) => {
                   setStreet(e.target.value)
                 }}
+                value={street}
                 id="street"
                 type="text"
               />
@@ -91,6 +118,7 @@ export default function CreateEmployee() {
                 onChange={(e) => {
                   setCity(e.target.value)
                 }}
+                value={city}
                 id="city"
                 type="text"
               />
@@ -99,8 +127,10 @@ export default function CreateEmployee() {
                 onChange={(e) => {
                   setState(e.target.value)
                 }}
+                value={state}
                 name="state"
                 id="state"
+                role="combobox"
               >
                 <Dropdown type="countryStates" />
               </select>
@@ -109,6 +139,7 @@ export default function CreateEmployee() {
                 onChange={(e) => {
                   setZipCode(e.target.value)
                 }}
+                value={zipCode}
                 id="zip-code"
                 type="number"
                 minLength="5"
@@ -121,15 +152,14 @@ export default function CreateEmployee() {
               }}
               name="department"
               id="department"
+              value={department}
             >
               <Dropdown type="departments" />
             </select>
             <ValidationBox firstName={firstName} lastName={lastName} />
           </form>
           <button
-            disabled={
-              firstName.length >= 2 && lastName.length >= 2 ? false : true
-            }
+            disabled={firstName && lastName ? false : true}
             type="submit"
             form="create-employee"
           >
@@ -137,7 +167,7 @@ export default function CreateEmployee() {
           </button>
         </div>
       </main>
-      {isModalOpen && <ConfirmModal />}
+      {/* <ConfirmModal /> */}
     </>
   )
 }
