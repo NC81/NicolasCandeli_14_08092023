@@ -1,40 +1,46 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import { toggleModal, isModalOpenSelector } from '../features/user'
 import closeIcon from '../assets/close.png'
 
 export default function ConfirmModal() {
   const dispatch = useDispatch()
+  const contentRef = useRef(null)
+  const buttonRef = useRef(null)
   const isModalOpen = useSelector(isModalOpenSelector)
 
   useEffect(() => {
-    function handleEscapeKey(e) {
+    function handleKey(e) {
       if (e.key === 'Escape') {
         dispatch(toggleModal(false))
       }
     }
-    document.addEventListener('keydown', handleEscapeKey)
-    return () => document.removeEventListener('keydown', handleEscapeKey)
+    document.addEventListener('keydown', handleKey)
+    return () => document.removeEventListener('keydown', handleKey)
   }, [dispatch])
+
+  function handleClick(e) {
+    if (
+      buttonRef.current.contains(e.target) ||
+      !contentRef.current.contains(e.target)
+    ) {
+      dispatch(toggleModal(false))
+    }
+  }
 
   return (
     <>
       {isModalOpen && (
         <div
-          onKeyDown={(e) => {
-            e.key === 'Enter' && dispatch(toggleModal(false))
+          onClick={(e) => {
+            handleClick(e)
           }}
           className="modal-blocker"
         >
-          <div className="modal-content">
+          <div ref={contentRef} className="modal-content">
             Employee Created!
-            <button
-              onClick={() => {
-                dispatch(toggleModal(false))
-              }}
-              className="close-button"
-            >
-              <img src={closeIcon} alt="" />
+            <button ref={buttonRef} className="close-button">
+              <img src={closeIcon} alt="Close" />
             </button>
           </div>
         </div>
