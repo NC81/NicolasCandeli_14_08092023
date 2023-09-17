@@ -4,17 +4,24 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import './index.css'
 import CreateEmployee from './pages/create-employee'
 import EmployeeList from './pages/employee-list'
+import Layout from './components/layout'
 import { Provider } from 'react-redux'
 import { store } from './utils/store'
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <CreateEmployee />,
-  },
-  {
-    path: 'list',
-    element: <EmployeeList />,
+    element: <Layout />,
+    children: [
+      {
+        path: 'employees-list',
+        element: <EmployeeList />,
+      },
+      {
+        path: 'create-employee',
+        element: <CreateEmployee />,
+      },
+    ],
   },
 ])
 
