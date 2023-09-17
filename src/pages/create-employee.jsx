@@ -35,7 +35,7 @@ export default function CreateEmployee() {
         startDate: startDate.dateString,
       })
     )
-    dispatch(toggleModal(''))
+    dispatch(toggleModal(true))
     setFirstName('')
     setLastName('')
     setStreet('')
@@ -45,6 +45,14 @@ export default function CreateEmployee() {
     setState('')
     setBirthDate({ date: '', dateString: '' })
     setStartDate({ date: '', dateString: '' })
+  }
+
+  const datePickerStyle = {
+    width: '100%',
+    borderRadius: 0,
+    backgroundColor: '#f7f7f7',
+    border: 'none',
+    boxShadow: 'inset 1px 1px 5px rgba(161, 161, 161, 0.788)',
   }
 
   return (
@@ -89,6 +97,7 @@ export default function CreateEmployee() {
             <DatePicker
               placeholder="Select birth date"
               format="MM-DD-YYYY"
+              style={datePickerStyle}
               onChange={(date, dateString) => {
                 setBirthDate({ date: date, dateString: dateString })
               }}
@@ -109,6 +118,7 @@ export default function CreateEmployee() {
             <DatePicker
               placeholder="Select start date"
               format="MM-DD-YYYY"
+              style={datePickerStyle}
               onChange={(date, dateString) => {
                 setStartDate({ date: date, dateString: dateString })
               }}

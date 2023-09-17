@@ -1,8 +1,12 @@
 export default function Dropdown({ list }) {
   return (
     <>
-      {list.map(({ name, abbreviation }, index) => (
-        <option value={abbreviation} key={`${name}-${index}`}>
+      {list.map(({ name, value }, index) => (
+        <option
+          value={value}
+          key={`${name}-${index}`}
+          hidden={value === '' ? true : false}
+        >
           {name}
         </option>
       ))}
