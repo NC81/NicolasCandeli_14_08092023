@@ -3,10 +3,11 @@ import { useDispatch } from 'react-redux'
 import { createEmployee } from '../features/employees'
 import { toggleModal } from '../features/user'
 import { departments, countryStates } from '../data/ui'
+import { DatePicker } from 'antd'
+import warning from '../assets/warning.png'
+import checked from '../assets/checked.png'
 import Dropdown from '../components/dropdown'
 import ConfirmModal from '../components/confirm-modal'
-import ValidationBox from '../components/validation-box'
-import { DatePicker } from 'antd'
 
 export default function CreateEmployee() {
   const dispatch = useDispatch()
@@ -67,9 +68,18 @@ export default function CreateEmployee() {
           className="employee-form"
         >
           <fieldset>
-            <legend>RELATIVE</legend>
-            <label htmlFor="first-name">
-              First Name <span className="label-required">(required)</span>
+            <legend>IDENTITY</legend>
+            <label className="label-required" htmlFor="first-name">
+              First Name{' '}
+              <span className="text-required">
+                (required){' '}
+                {firstName && (
+                  <img className="valid-icon" src={checked} alt="Checked" />
+                )}
+              </span>
+              {!firstName && (
+                <img className="warning-icon" src={warning} alt="Warning" />
+              )}
             </label>
             <input
               onChange={(e) => {
@@ -80,8 +90,17 @@ export default function CreateEmployee() {
               className="classic-input"
               id="first-name"
             />
-            <label htmlFor="last-name">
-              Last Name <span className="label-required">(required)</span>
+            <label className="label-required" htmlFor="last-name">
+              Last Name{' '}
+              <span className="text-required">
+                (required){' '}
+                {lastName && (
+                  <img className="valid-icon" src={checked} alt="Checked" />
+                )}
+              </span>
+              {!lastName && (
+                <img className="warning-icon" src={warning} alt="Warning" />
+              )}
             </label>
             <input
               onChange={(e) => {
@@ -93,7 +112,6 @@ export default function CreateEmployee() {
               id="last-name"
             />
             <label>Date of Birth</label>
-
             <DatePicker
               placeholder="Select birth date"
               format="MM-DD-YYYY"
@@ -103,29 +121,20 @@ export default function CreateEmployee() {
               }}
               value={birthDate.date !== '' ? birthDate.date : null}
             />
-            <ValidationBox
-              type="identity"
-              firstName={firstName}
-              lastName={lastName}
-            />
           </fieldset>
           <fieldset>
             <legend>COMPANY</legend>
-            <label>
-              Start Date <span className="label-required">(required)</span>
-            </label>
-
-            <DatePicker
-              placeholder="Select start date"
-              format="MM-DD-YYYY"
-              style={datePickerStyle}
-              onChange={(date, dateString) => {
-                setStartDate({ date: date, dateString: dateString })
-              }}
-              value={startDate.date !== '' ? startDate.date : null}
-            />
-            <label htmlFor="department">
-              Department <span className="label-required">(required)</span>
+            <label className="label-required" htmlFor="department">
+              Department{' '}
+              <span className="text-required">
+                (required){' '}
+                {department && (
+                  <img className="valid-icon" src={checked} alt="Checked" />
+                )}
+              </span>
+              {!department && (
+                <img className="warning-icon" src={warning} alt="Warning" />
+              )}
             </label>
             <select
               onChange={(e) => {
@@ -138,7 +147,16 @@ export default function CreateEmployee() {
             >
               <Dropdown list={departments} />
             </select>
-            <ValidationBox type="company" startDate={startDate.dateString} />
+            <label className="label-required">Start Date</label>
+            <DatePicker
+              placeholder="Select start date"
+              format="MM-DD-YYYY"
+              style={datePickerStyle}
+              onChange={(date, dateString) => {
+                setStartDate({ date: date, dateString: dateString })
+              }}
+              value={startDate.date !== '' ? startDate.date : null}
+            />
           </fieldset>
           <fieldset>
             <legend>ADDRESS</legend>
@@ -171,7 +189,6 @@ export default function CreateEmployee() {
               name="state"
               id="state"
               className="classic-input"
-              role="combobox"
             >
               <Dropdown list={countryStates} />
             </select>
@@ -188,11 +205,9 @@ export default function CreateEmployee() {
             />
           </fieldset>
         </form>
-
         <button
-          disabled={
-            firstName && lastName && startDate.dateString ? false : true
-          }
+          className="submit-button"
+          disabled={firstName && lastName && department ? false : true}
           type="submit"
           form="employee-form"
         >

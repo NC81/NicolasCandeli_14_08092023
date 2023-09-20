@@ -1,6 +1,6 @@
 import * as React from 'react'
 import * as ReactDOM from 'react-dom/client'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom'
 import './index.css'
 import CreateEmployee from './pages/create-employee'
 import EmployeeList from './pages/employee-list'
@@ -14,12 +14,16 @@ const router = createBrowserRouter([
     element: <Layout />,
     children: [
       {
-        path: 'employees-list',
-        element: <EmployeeList />,
+        index: true,
+        element: <Navigate to="create-employee" replace />,
       },
       {
         path: 'create-employee',
         element: <CreateEmployee />,
+      },
+      {
+        path: 'employees-list',
+        element: <EmployeeList />,
       },
     ],
   },
