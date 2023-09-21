@@ -21,14 +21,23 @@ export default function CreateEmployee() {
   const [birthDate, setBirthDate] = useState({ date: '', dateString: '' })
   const [startDate, setStartDate] = useState({ date: '', dateString: '' })
 
+  function capitalize(string) {
+    const wordsArray = string.split(' ')
+    const formattedWordsArray = wordsArray.map((el) => {
+      return el.charAt(0).toUpperCase() + el.slice(1).toLowerCase()
+    })
+    const formattedString = formattedWordsArray.join(' ')
+    return formattedString
+  }
+
   function handleSubmit(e) {
     e.preventDefault()
     dispatch(
       createEmployee({
-        firstName: firstName,
-        lastName: lastName,
-        street: street,
-        city: city,
+        firstName: capitalize(firstName),
+        lastName: capitalize(lastName),
+        street: capitalize(street),
+        city: capitalize(city),
         zipCode: zipCode,
         department: department,
         state: state,
