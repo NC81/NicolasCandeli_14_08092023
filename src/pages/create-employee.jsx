@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { createEmployee } from '../features/employees'
 import { toggleModal } from '../features/user'
-import { departments, countryStates } from '../data/ui'
+import { departments, countryStates } from '../data/select'
 import { DatePicker } from 'antd'
 import warning from '../assets/warning.png'
 import checked from '../assets/checked.png'
@@ -89,6 +89,7 @@ export default function CreateEmployee() {
               type="text"
               className="classic-input"
               id="first-name"
+              required
             />
             <label className="label-required" htmlFor="last-name">
               Last Name{' '}
@@ -110,6 +111,7 @@ export default function CreateEmployee() {
               className="classic-input"
               type="text"
               id="last-name"
+              required
             />
             <label>Date of Birth</label>
             <DatePicker
@@ -144,6 +146,7 @@ export default function CreateEmployee() {
               id="department"
               className="classic-input"
               value={department}
+              required
             >
               <Dropdown list={departments} />
             </select>
