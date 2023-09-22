@@ -6,8 +6,8 @@ import { departments, countryStates } from '../data/select'
 import { DatePicker } from 'antd'
 import warning from '../assets/warning.png'
 import checked from '../assets/checked.png'
-import Dropdown from '../components/dropdown'
-import ConfirmModal from '../components/confirm-modal'
+import Dropdown from '../components/dropdown/dropdown'
+import ConfirmModal from '../components/modal/confirm-modal'
 
 export default function CreateEmployee() {
   const dispatch = useDispatch()
@@ -67,7 +67,7 @@ export default function CreateEmployee() {
 
   return (
     <>
-      <div className="form-container">
+      <div data-testid="test" className="form-container">
         <form
           onSubmit={(e) => {
             handleSubmit(e)
@@ -97,6 +97,7 @@ export default function CreateEmployee() {
               value={firstName}
               type="text"
               className="classic-input"
+              data-testid="first-name-input"
               id="first-name"
               required
             />
@@ -118,6 +119,7 @@ export default function CreateEmployee() {
               }}
               value={lastName}
               className="classic-input"
+              data-testid="last-name-input"
               type="text"
               id="last-name"
               required
@@ -154,6 +156,7 @@ export default function CreateEmployee() {
               name="department"
               id="department"
               className="classic-input"
+              data-testid="department-input"
               value={department}
               required
             >
@@ -201,6 +204,7 @@ export default function CreateEmployee() {
               name="state"
               id="state"
               className="classic-input"
+              data-testid="state-input"
             >
               <Dropdown list={countryStates} />
             </select>
@@ -222,6 +226,7 @@ export default function CreateEmployee() {
           disabled={firstName && lastName && department ? false : true}
           type="submit"
           form="employee-form"
+          data-testid="submit-button"
         >
           Save
         </button>

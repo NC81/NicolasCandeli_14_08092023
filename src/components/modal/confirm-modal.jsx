@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useRef } from 'react'
-import { toggleModal, isModalOpenSelector } from '../features/user'
-import closeIcon from '../assets/close.png'
+import { toggleModal, isModalOpenSelector } from '../../features/user'
+import closeIcon from '../../assets/close.png'
 
 export default function ConfirmModal() {
   const dispatch = useDispatch()
@@ -36,10 +36,15 @@ export default function ConfirmModal() {
             handleClick(e)
           }}
           className="modal-blocker"
+          data-testid="modal-blocker"
         >
           <div ref={contentRef} className="modal-content">
             Employee Created!
-            <button ref={buttonRef} className="close-button">
+            <button
+              ref={buttonRef}
+              className="close-button"
+              data-testid="close-button"
+            >
               <img src={closeIcon} alt="Close" />
             </button>
           </div>

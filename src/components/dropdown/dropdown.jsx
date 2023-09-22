@@ -6,6 +6,7 @@ export default function Dropdown({ list }) {
           value={value}
           key={`${name}-${index}`}
           hidden={value === '' ? true : false}
+          data-testid={`option-${value}`}
         >
           {name}
         </option>
