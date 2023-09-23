@@ -4,7 +4,7 @@ import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom'
 import './index.css'
 import Error from './pages/error'
 import CreateEmployee from './pages/create-employee'
-import EmployeeList from './pages/employee-list'
+import EmployeesList from './pages/employees-list'
 import Layout from './components/layout'
 import { Provider } from 'react-redux'
 import { store } from './utils/store'
@@ -25,7 +25,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'employees-list',
-        element: <EmployeeList />,
+        element: <EmployeesList />,
       },
     ],
   },

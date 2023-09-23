@@ -18,10 +18,15 @@ body {
 
 label {
   display: block;
+  position: relative;
   margin-top: 15px;
   margin-bottom: 10px;
   font-size: 14px;
   font-weight: 500;
+}
+
+button {
+  border: none;
 }
 
 h1 {
@@ -80,7 +85,6 @@ legend {
   width: 30px;
   height: 30px;
   padding: 0;
-  border: none;
   background-color: 292929;
   cursor: pointer;
 }
@@ -109,7 +113,6 @@ legend {
   box-shadow: inset 1px 1px 4px rgba(161, 161, 161, 0.788);
 }
 
-.classic-input:focus-visible,
 .classic-input:focus-visible {
   background-color: white;
 }
@@ -172,7 +175,6 @@ legend {
   width: 60px;
   background-color: #1b7575;
   color: white;
-  border: none;
 }
 
 .submit-button:disabled {
@@ -190,18 +192,18 @@ legend {
   font-weight: 300;
 }
 
-.warning-icon {
+.checked-icon {
   position: absolute;
   width: 14px;
-  left: -16px;
-  top: 35px;
+  right: -17px;
+  top: 2px;
 }
 
-.valid-icon {
+.warning-icon {
   position: absolute;
-  width: 17px;
-  right: -20px;
-  top: -1px;
+  width: 16px;
+  right: -16px;
+  top: 2px;
 }
 
 .error-page {
@@ -215,4 +217,27 @@ legend {
 .error-info {
   text-align: center;
   margin-top: 10px;
+}
+
+.clear-button {
+  display: none;
+  position: absolute;
+  top: 36px;
+  right: 24px;
+  z-index: 1;
+  padding: 0 4px;
+  cursor: pointer;
+  background-color: transparent;
+}
+
+.clear-button img {
+  width: 10px;
+}
+
+.input-group {
+  position: relative;
+}
+
+.input-group:focus-within > button {
+  display: block;
 }
