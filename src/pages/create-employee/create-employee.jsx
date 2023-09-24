@@ -1,13 +1,13 @@
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { createEmployee } from '../features/employees'
-import { toggleModal } from '../features/user'
-import { departments, countryStates } from '../data/select'
+import { createEmployee } from '../../features/employees'
+import { toggleModal } from '../../features/user'
+import { departments, countryStates } from '../../data/select'
 import { DatePicker } from 'antd'
-import Dropdown from '../components/dropdown/dropdown'
-import ConfirmModal from '../components/modal/confirm-modal'
-import ClearButton from '../components/clear-button'
-import LabelIcon from '../components/label-icon'
+import Dropdown from '../../components/dropdown/dropdown'
+import ConfirmModal from '../../components/modal/confirm-modal'
+import ClearButton from '../../components/clear-button'
+import ValidIcon from '../../components/valid-icon/valid-icon'
 
 export default function CreateEmployee() {
   const dispatch = useDispatch()
@@ -82,7 +82,7 @@ export default function CreateEmployee() {
               <label className="label-required" htmlFor="first-name">
                 First Name{' '}
                 <span className="text-required">
-                  (required) <LabelIcon value={firstName} />
+                  (required) <ValidIcon value={firstName} />
                 </span>
               </label>
               <input
@@ -102,7 +102,7 @@ export default function CreateEmployee() {
               <label className="label-required" htmlFor="last-name">
                 Last Name{' '}
                 <span className="text-required">
-                  (required) <LabelIcon value={lastName} />
+                  (required) <ValidIcon value={lastName} />
                 </span>
               </label>
               <input
@@ -142,7 +142,7 @@ export default function CreateEmployee() {
               <label className="label-required" htmlFor="department">
                 Department{' '}
                 <span className="text-required">
-                  (required) <LabelIcon value={department} />
+                  (required) <ValidIcon value={department} />
                 </span>
               </label>
               <select
@@ -246,7 +246,6 @@ export default function CreateEmployee() {
         </form>
         <button
           className="submit-button"
-          disabled={firstName && lastName && department ? false : true}
           type="submit"
           form="employee-form"
           data-testid="submit-button"

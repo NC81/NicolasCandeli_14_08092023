@@ -177,12 +177,6 @@ legend {
   color: white;
 }
 
-.submit-button:disabled {
-  height: 25px;
-  width: 60px;
-  background-color: #4aadad;
-}
-
 .label-required,
 .text-required {
   position: relative;
@@ -196,14 +190,14 @@ legend {
   position: absolute;
   width: 14px;
   right: -17px;
-  top: 2px;
+  top: 1px;
 }
 
 .warning-icon {
   position: absolute;
   width: 16px;
   right: -16px;
-  top: 2px;
+  top: 1px;
 }
 
 .error-page {

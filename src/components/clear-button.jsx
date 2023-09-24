@@ -4,7 +4,11 @@ export default function ClearButton({ onClick, value }) {
   return (
     <>
       {value && (
-        <button className="clear-button" onClick={onClick}>
+        <button
+          className="clear-button"
+          data-testid="clear-button"
+          onClick={onClick}
+        >
           <img src={clear} alt="Clear" />
         </button>
       )}
