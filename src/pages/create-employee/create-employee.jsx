@@ -1,12 +1,12 @@
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { createEmployee } from '../../features/employees'
-import { toggleModal } from '../../features/user'
 import { departments, countryStates } from '../../data/select'
 import { DatePicker } from 'antd'
+import { capitalize } from '../../utils/format'
 import Dropdown from '../../components/dropdown/dropdown'
 import ConfirmModal from '../../components/modal/confirm-modal'
-import ClearButton from '../../components/clear-button'
+import ClearButton from '../../components/clear-button/clear-button'
 import ValidIcon from '../../components/valid-icon/valid-icon'
 
 export default function CreateEmployee() {
@@ -20,15 +20,7 @@ export default function CreateEmployee() {
   const [countryState, setCountryState] = useState('')
   const [birthDate, setBirthDate] = useState({ date: '', dateString: '' })
   const [startDate, setStartDate] = useState({ date: '', dateString: '' })
-
-  function capitalize(string) {
-    const wordsArray = string.split(' ')
-    const formattedWordsArray = wordsArray.map((el) => {
-      return el.charAt(0).toUpperCase() + el.slice(1).toLowerCase()
-    })
-    const formattedString = formattedWordsArray.join(' ')
-    return formattedString
-  }
+  const [isModalOpened, setIsModalOpened] = useState(false)
 
   function handleSubmit(e) {
     e.preventDefault()
@@ -45,7 +37,6 @@ export default function CreateEmployee() {
         startDate: startDate.dateString,
       })
     )
-    dispatch(toggleModal(true))
     setFirstName('')
     setLastName('')
     setStreet('')
@@ -55,6 +46,7 @@ export default function CreateEmployee() {
     setCountryState('')
     setBirthDate({ date: '', dateString: '' })
     setStartDate({ date: '', dateString: '' })
+    setIsModalOpened(true)
   }
 
   const datePickerStyle = {
@@ -67,7 +59,7 @@ export default function CreateEmployee() {
 
   return (
     <>
-      <div data-testid="test" className="form-container">
+      <div className="form-container">
         <form
           onSubmit={(e) => {
             handleSubmit(e)
@@ -100,10 +92,7 @@ export default function CreateEmployee() {
             </div>
             <div className="input-group">
               <label className="label-required" htmlFor="last-name">
-                Last Name{' '}
-                <span className="text-required">
-                  (required) <ValidIcon value={lastName} />
-                </span>
+                Last Name <span className="text-required"></span>
               </label>
               <input
                 onChange={(e) => {
@@ -114,7 +103,6 @@ export default function CreateEmployee() {
                 data-testid="last-name-input"
                 type="text"
                 id="last-name"
-                required
               />
               <ClearButton value={lastName} onClick={() => setLastName('')} />
             </div>
@@ -253,7 +241,7 @@ export default function CreateEmployee() {
           Save
         </button>
       </div>
-      <ConfirmModal />
+      {isModalOpened && <ConfirmModal setIsModalOpened={setIsModalOpened} />}
     </>
   )
 }

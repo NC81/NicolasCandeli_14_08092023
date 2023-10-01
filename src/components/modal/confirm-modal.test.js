@@ -2,34 +2,27 @@ import '@testing-library/jest-dom'
 import { screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { renderWithProviders } from '../../utils/test/index'
-import ConfirmModal from '../modal/confirm-modal'
+import { act } from 'react-dom/test-utils'
+import CreateEmployee from '../../pages/create-employee/create-employee'
 
-describe('Given the modal dialog is open', () => {
-  it('should render a confirmation message and a close button', async () => {
-    renderWithProviders(<ConfirmModal />, {
-      preloadedState: {
-        user: { isModalOpen: true },
-      },
-    })
-
-    const modal = screen.getByTestId('modal-blocker')
-    expect(modal).toHaveTextContent('Employee Created!')
-
-    const closeButton = screen.getByTestId('close-button')
-    expect(closeButton).toBeInTheDocument()
-  })
-
+describe('Given the modal is open', () => {
   describe('when I click on close button', () => {
     it('should close the modal dialog', async () => {
       const user = userEvent.setup()
-      renderWithProviders(<ConfirmModal />, {
-        preloadedState: {
-          user: { isModalOpen: true },
-        },
-      })
+      renderWithProviders(<CreateEmployee />)
 
-      const modalBlocker = screen.getByTestId('modal-blocker')
-      expect(modalBlocker).toHaveTextContent('Employee Created!')
+      const fistNameInput = screen.getByTestId('first-name-input')
+      const lastNameInput = screen.getByTestId('last-name-input')
+      const departmentInput = screen.getByTestId('department-input')
+      const firstOption = screen.getByTestId('option-Sales')
+      user.type(fistNameInput, 'John')
+      user.type(lastNameInput, 'Connor')
+      act(() => {
+        user.selectOptions(departmentInput, firstOption)
+      })
+      const submitButton = screen.getByTestId('submit-button')
+      user.click(submitButton)
+      await screen.findByTestId('modal-blocker')
 
       const closeButton = screen.getByTestId('close-button')
       user.click(closeButton)
@@ -41,14 +34,21 @@ describe('Given the modal dialog is open', () => {
 
   describe('when I press escape key', () => {
     it('should close the modal dialog', async () => {
-      renderWithProviders(<ConfirmModal />, {
-        preloadedState: {
-          user: { isModalOpen: true },
-        },
-      })
+      const user = userEvent.setup()
+      renderWithProviders(<CreateEmployee />)
 
-      const modalBlocker = screen.getByTestId('modal-blocker')
-      expect(modalBlocker).toHaveTextContent('Employee Created!')
+      const fistNameInput = screen.getByTestId('first-name-input')
+      const lastNameInput = screen.getByTestId('last-name-input')
+      const departmentInput = screen.getByTestId('department-input')
+      const firstOption = screen.getByTestId('option-Sales')
+      user.type(fistNameInput, 'John')
+      user.type(lastNameInput, 'Connor')
+      act(() => {
+        user.selectOptions(departmentInput, firstOption)
+      })
+      const submitButton = screen.getByTestId('submit-button')
+      user.click(submitButton)
+      await screen.findByTestId('modal-blocker')
 
       userEvent.keyboard('{Escape}')
       await waitFor(() =>

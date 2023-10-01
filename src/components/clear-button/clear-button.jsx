@@ -1,6 +1,7 @@
-import clear from '../assets/clear.png'
+import { memo } from 'react'
+import clear from '../../assets/clear.png'
 
-export default function ClearButton({ onClick, value }) {
+export default memo(function ClearButton({ onClick, value }) {
   return (
     <>
       {value && (
@@ -14,4 +15,4 @@ export default function ClearButton({ onClick, value }) {
       )}
     </>
   )
-}
+})

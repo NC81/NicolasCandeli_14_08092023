@@ -1,4 +1,6 @@
-export default function Dropdown({ list }) {
+import { memo } from 'react'
+
+export default memo(function Dropdown({ list }) {
   return (
     <>
       {list.map(({ name, value }, index) => (
@@ -13,4 +15,4 @@ export default function Dropdown({ list }) {
       ))}
     </>
   )
-}
+})
