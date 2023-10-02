@@ -1,13 +1,11 @@
-import { useStore } from 'react-redux'
+import { useSelector } from 'react-redux'
+import { employees } from '../features/employees'
 
 export default function EmployeesList() {
-  const store = useStore()
-  const stateData = store.getState().employees
-  console.log('stateData', stateData)
+  const employeesSelector = useSelector(employees)
+  console.log('employeesSelector', employeesSelector)
 
   return (
-    <div className="create-employee-wrapper">
-      {/* Insert <Table /> component here */}
-    </div>
+    <div className="page-wrapper">{/* Insert <Table /> component here */}</div>
   )
 }

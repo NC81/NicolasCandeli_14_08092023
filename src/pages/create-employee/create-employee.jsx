@@ -59,7 +59,7 @@ export default function CreateEmployee() {
 
   return (
     <>
-      <div className="form-container">
+      <div className="page-wrapper">
         <form
           onSubmit={(e) => {
             handleSubmit(e)

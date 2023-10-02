@@ -10,5 +10,6 @@ const { actions, reducer } = createSlice({
   },
 })
 
+export const employees = (state) => state.employees
 export const { createEmployee } = actions
 export default reducer
