@@ -1,11 +1,13 @@
 import { useSelector } from 'react-redux'
 import { employees } from '../features/employees'
+import { Table } from 'ocr-table-p14'
 
 export default function EmployeesList() {
   const employeesSelector = useSelector(employees)
-  console.log('employeesSelector', employeesSelector)
 
   return (
-    <div className="page-wrapper">{/* Insert <Table /> component here */}</div>
+    <div className="page-wrapper">
+      <Table data={employeesSelector} />
+    </div>
   )
 }

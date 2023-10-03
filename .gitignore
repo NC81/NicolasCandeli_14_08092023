@@ -20,6 +20,8 @@
 
 # dev
 /jquery
+employee-list-test.jsx
+mock-list.js
 test.html
 
 npm-debug.log*
