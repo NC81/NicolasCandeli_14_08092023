@@ -3,18 +3,21 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@babel/plugin-transform-private-property-in-object": "^7.22.11",
     "@reduxjs/toolkit": "^1.9.5",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^14.5.1",
     "antd": "^5.9.0",
-    "ocr-table-p14": "^0.1.1",
-    "prop-types": "^15.8.1",
+    "ocr-table-p14": "^0.1.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^8.1.2",
     "react-router-dom": "^6.15.0",
     "react-scripts": "5.0.1"
+  },
+  "devDependencies": {
+    "@babel/plugin-transform-private-property-in-object": "^7.22.11"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -39,8 +42,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "@babel/plugin-transform-private-property-in-object": "^7.22.11"
   }
 }

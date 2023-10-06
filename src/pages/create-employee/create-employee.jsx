@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { createEmployee } from '../../features/employees'
-import { departments, countryStates } from '../../data/select'
+import { departments, countryStates } from '../../data/dropdown'
 import { DatePicker } from 'antd'
 import { capitalize } from '../../utils/format'
 import Dropdown from '../../components/dropdown/dropdown'
