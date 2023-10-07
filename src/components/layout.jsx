@@ -4,7 +4,7 @@ export default function Layout() {
   return (
     <main className="layout">
       <header>
-        <h1>HRnet</h1>
+        <h1>H R n e t</h1>
         <nav className="navbar">
           <NavLink
             className="page-link page-link-creation"

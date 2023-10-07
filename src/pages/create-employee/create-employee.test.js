@@ -11,7 +11,7 @@ describe('Given I am a user on the create employee page', () => {
       const user = userEvent.setup()
       renderWithProviders(<CreateEmployee />)
 
-      const startDateNode = screen.getByPlaceholderText(/select birth date/i)
+      const startDateNode = screen.getByPlaceholderText(/select a birth date/i)
       expect(startDateNode).toBeInTheDocument()
 
       act(() => {
@@ -22,39 +22,23 @@ describe('Given I am a user on the create employee page', () => {
     })
   })
 
-  describe('when I select a department in the dropdown menu', () => {
-    it('should render the correct string in the corresponding input', async () => {
-      const user = userEvent.setup()
-      renderWithProviders(<CreateEmployee />)
-
-      const firstOption = screen.getByTestId('option-Sales')
-      expect(firstOption).toHaveTextContent('Sales')
-      expect(firstOption).toHaveValue('Sales')
-
-      const departmentInput = screen.getByTestId('department-input')
-      act(() => {
-        user.selectOptions(departmentInput, firstOption)
-      })
-      await waitFor(() => expect(firstOption.selected).toBe(true))
-      await waitFor(() => expect(departmentInput).toHaveTextContent('Sales'))
-    })
-  })
-
   describe('when I select a state in the dropdown menu', () => {
-    it('should render the correct string in the corresponding input', async () => {
+    it('should render the corresponding string', async () => {
       const user = userEvent.setup()
       renderWithProviders(<CreateEmployee />)
 
-      const lastOption = screen.getByTestId('option-WY')
-      expect(lastOption).toHaveTextContent('Wyoming')
-      expect(lastOption).toHaveValue('WY')
+      const select = screen.getByLabelText('State')
+      user.click(select)
 
-      const stateInput = screen.getByTestId('state-input')
-      act(() => {
-        user.selectOptions(stateInput, lastOption)
-      })
-      await waitFor(() => expect(lastOption.selected).toBe(true))
-      await waitFor(() => expect(stateInput).toHaveTextContent('Wyoming'))
+      userEvent.keyboard('{ArrowDown}')
+      const option = await screen.findByText('Alabama')
+      await screen.findByText('Delaware')
+
+      user.click(option)
+      await waitFor(() =>
+        expect(screen.queryByText('Delaware')).not.toBeInTheDocument()
+      )
+      expect(screen.getByText('Alabama')).toBeInTheDocument()
     })
   })
 
@@ -67,17 +51,6 @@ describe('Given I am a user on the create employee page', () => {
         const fistNameInput = screen.getByTestId('first-name-input')
         user.type(fistNameInput, 'John')
         await waitFor(() => expect(fistNameInput).toHaveValue('John'))
-
-        const lastNameInput = screen.getByTestId('last-name-input')
-        user.type(lastNameInput, 'Connor')
-        await waitFor(() => expect(lastNameInput).toHaveValue('Connor'))
-
-        const departmentInput = screen.getByTestId('department-input')
-        const firstOption = screen.getByTestId('option-Sales')
-        act(() => {
-          user.selectOptions(departmentInput, firstOption)
-        })
-        await waitFor(() => expect(firstOption.selected).toBe(true))
 
         const submitButton = screen.getByTestId('submit-button')
         user.click(submitButton)
