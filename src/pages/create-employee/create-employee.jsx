@@ -16,8 +16,8 @@ export default function CreateEmployee() {
   const [street, setStreet] = useState('')
   const [city, setCity] = useState('')
   const [zipCode, setZipCode] = useState('')
-  const [department, setDepartment] = useState('')
-  const [countryState, setCountryState] = useState('')
+  const [department, setDepartment] = useState({ label: '', value: '' })
+  const [countryState, setCountryState] = useState({ label: '', value: '' })
   const [birthDate, setBirthDate] = useState({ date: '', dateString: '' })
   const [startDate, setStartDate] = useState({ date: '', dateString: '' })
   const [isModalOpened, setIsModalOpened] = useState(false)
@@ -31,8 +31,8 @@ export default function CreateEmployee() {
         street: capitalize(street),
         city: capitalize(city),
         zipCode: zipCode,
-        department: department,
-        state: countryState,
+        department: department.value,
+        state: countryState.value,
         birthDate: birthDate.dateString,
         startDate: startDate.dateString,
       })
@@ -42,8 +42,8 @@ export default function CreateEmployee() {
     setStreet('')
     setCity('')
     setZipCode('')
-    setDepartment('')
-    setCountryState('')
+    setDepartment({ label: '', value: '' })
+    setCountryState({ label: '', value: '' })
     setBirthDate({ date: '', dateString: '' })
     setStartDate({ date: '', dateString: '' })
     setIsModalOpened(true)
@@ -181,11 +181,11 @@ export default function CreateEmployee() {
                   onChange={(e) => {
                     setDepartment(e)
                   }}
-                  value={department}
+                  value={department.value !== '' ? department : null}
                 />
                 <ClearButton
                   value={department}
-                  onClick={() => setDepartment('')}
+                  onClick={() => setDepartment({ label: '', value: '' })}
                 />
               </div>
               <div className="input-group">
@@ -245,11 +245,11 @@ export default function CreateEmployee() {
                   onChange={(e) => {
                     setCountryState(e)
                   }}
-                  value={countryState}
+                  value={countryState.value !== '' ? countryState : null}
                 />
                 <ClearButton
                   value={countryState}
-                  onClick={() => setCountryState('')}
+                  onClick={() => setCountryState({ label: '', value: '' })}
                 />
               </div>
               <div className="input-group">
