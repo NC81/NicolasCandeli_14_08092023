@@ -184,7 +184,7 @@ export default function CreateEmployee() {
                   value={department.value !== '' ? department : null}
                 />
                 <ClearButton
-                  value={department}
+                  value={department.value}
                   onClick={() => setDepartment({ label: '', value: '' })}
                 />
               </div>
@@ -248,7 +248,7 @@ export default function CreateEmployee() {
                   value={countryState.value !== '' ? countryState : null}
                 />
                 <ClearButton
-                  value={countryState}
+                  value={countryState.value}
                   onClick={() => setCountryState({ label: '', value: '' })}
                 />
               </div>
