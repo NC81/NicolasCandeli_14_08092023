@@ -9,7 +9,7 @@ export default function ClearButton({ onClick, value }) {
           data-testid="clear-button"
           onClick={onClick}
         >
-          <img src={clear} alt="Clear" />
+          <img src={clear} alt="Clear input" />
         </button>
       )}
     </>

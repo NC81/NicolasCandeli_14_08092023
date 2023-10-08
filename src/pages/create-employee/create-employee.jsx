@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { capitalize } from '../../utils/format'
+import { capitalize } from '../../utils/format/format'
 import { createEmployee } from '../../features/employees'
 import { departments, countryStates } from '../../data/dropdown'
 import { DatePicker, ConfigProvider } from 'antd'
@@ -81,16 +81,16 @@ export default function CreateEmployee() {
         padding: '6px 0 0 11px',
       }
     },
-    valueContainer: (provided) => ({
-      ...provided,
-      padding: '0 11px',
-    }),
-    singleValue: (provided) => ({
-      ...provided,
+    placeholder: (base) => ({
+      ...base,
       margin: '0',
     }),
-    indicatorsContainer: (provided) => ({
-      ...provided,
+    valueContainer: (base) => ({
+      ...base,
+      padding: '0 11px',
+    }),
+    indicatorsContainer: (base) => ({
+      ...base,
       height: '30px',
     }),
   }
@@ -146,16 +146,18 @@ export default function CreateEmployee() {
                   }}
                   value={lastName}
                   className="classic-input"
+                  data-testid="last-name-input"
                   type="text"
                   id="last-name"
                 />
                 <ClearButton value={lastName} onClick={() => setLastName('')} />
               </div>
               <div className="input-group">
-                <label>Date of Birth</label>
+                <label htmlFor="birth-date">Date of Birth</label>
                 <DatePicker
                   placeholder="Select a birth date"
                   format="MM-DD-YYYY"
+                  id="birth-date"
                   style={datePickerStyle}
                   allowClear={false}
                   showToday={false}
@@ -173,11 +175,13 @@ export default function CreateEmployee() {
             <fieldset>
               <legend>COMPANY</legend>
               <div className="input-group">
-                <label htmlFor="react-select-3-input">Department</label>
+                <label htmlFor="departments">Department</label>
                 <Select
                   styles={selectStyle}
                   options={departments}
                   placeholder="Select a department"
+                  name="departments"
+                  inputId="departments"
                   onChange={(e) => {
                     setDepartment(e)
                   }}
@@ -189,10 +193,12 @@ export default function CreateEmployee() {
                 />
               </div>
               <div className="input-group">
-                <label>Start Date</label>
+                <label htmlFor="start-date">Start Date</label>
                 <DatePicker
                   placeholder="Select a start date"
                   format="MM-DD-YYYY"
+                  id="start-date"
+                  data-testid="start-date"
                   style={datePickerStyle}
                   allowClear={false}
                   showToday={false}
@@ -236,12 +242,14 @@ export default function CreateEmployee() {
                 <ClearButton value={city} onClick={() => setCity('')} />
               </div>
               <div className="input-group">
-                <label htmlFor="react-select-5-input">State</label>
+                <label htmlFor="states">State</label>
                 <Select
                   styles={selectStyle}
                   options={countryStates}
                   placeholder="Select a state"
                   maxMenuHeight={308}
+                  name="states"
+                  inputId="states"
                   onChange={(e) => {
                     setCountryState(e)
                   }}

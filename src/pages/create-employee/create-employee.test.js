@@ -2,23 +2,29 @@ import '@testing-library/jest-dom'
 import { screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { renderWithProviders } from '../../utils/test/index'
-import { act } from 'react-dom/test-utils'
 import CreateEmployee from './create-employee'
 
 describe('Given I am a user on the create employee page', () => {
-  describe('when I select a date', () => {
-    it('should render the correct string in the corresponding input', async () => {
+  describe('when I type a name in last name input', () => {
+    it('should render the correct string in the input', async () => {
       const user = userEvent.setup()
       renderWithProviders(<CreateEmployee />)
 
-      const startDateNode = screen.getByPlaceholderText(/select a birth date/i)
-      expect(startDateNode).toBeInTheDocument()
+      const lastNameInput = screen.getByTestId('last-name-input')
+      user.type(lastNameInput, 'Marshall')
+      await waitFor(() => expect(lastNameInput).toHaveValue('Marshall'))
+    })
+  })
 
-      act(() => {
-        user.type(startDateNode, '05-05-2000')
-      })
+  describe('when I set a date in start date input', () => {
+    it('should render the correct string in the input', async () => {
+      renderWithProviders(<CreateEmployee />)
 
-      await waitFor(() => expect(startDateNode).toHaveValue('05-05-2000'))
+      const startDateInput = screen.getByTestId('start-date')
+      const dateString = '05-05-2000'
+
+      userEvent.type(startDateInput, dateString)
+      await waitFor(() => expect(startDateInput).toHaveValue(dateString))
     })
   })
 
@@ -27,8 +33,8 @@ describe('Given I am a user on the create employee page', () => {
       const user = userEvent.setup()
       renderWithProviders(<CreateEmployee />)
 
-      const select = screen.getByLabelText('State')
-      user.click(select)
+      const stateLabel = screen.getByLabelText('State')
+      user.click(stateLabel)
 
       userEvent.keyboard('{ArrowDown}')
       const option = await screen.findByText('Alabama')
@@ -48,9 +54,9 @@ describe('Given I am a user on the create employee page', () => {
         const user = userEvent.setup()
         renderWithProviders(<CreateEmployee />)
 
-        const fistNameInput = screen.getByTestId('first-name-input')
-        user.type(fistNameInput, 'John')
-        await waitFor(() => expect(fistNameInput).toHaveValue('John'))
+        const firstNameInput = screen.getByTestId('first-name-input')
+        user.type(firstNameInput, 'John')
+        await waitFor(() => expect(firstNameInput).toHaveValue('John'))
 
         const submitButton = screen.getByTestId('submit-button')
         user.click(submitButton)
