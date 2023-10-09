@@ -13,7 +13,7 @@ export default function Layout() {
             Create Employee
           </NavLink>
           <NavLink className="page-link page-link-list" to="/employees-list">
-            Current Employees
+            Active Employees
           </NavLink>
         </nav>
       </header>{' '}

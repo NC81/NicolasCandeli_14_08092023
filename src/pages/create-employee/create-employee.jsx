@@ -115,12 +115,10 @@ export default function CreateEmployee() {
           >
             <fieldset>
               <legend>IDENTITY</legend>
-              <div className="input-group">
+              <div className="input-wrapper">
                 <label className="label-required" htmlFor="first-name">
-                  First Name{' '}
-                  <span className="text-required">
-                    (required) <ValidIcon value={firstName} />
-                  </span>
+                  First Name <span className="text-required">(required)</span>
+                  <ValidIcon value={firstName} />
                 </label>
                 <input
                   onChange={(e) => {
@@ -138,7 +136,7 @@ export default function CreateEmployee() {
                   onClick={() => setFirstName('')}
                 />
               </div>
-              <div className="input-group">
+              <div className="input-wrapper">
                 <label htmlFor="last-name">Last Name</label>
                 <input
                   onChange={(e) => {
@@ -152,7 +150,7 @@ export default function CreateEmployee() {
                 />
                 <ClearButton value={lastName} onClick={() => setLastName('')} />
               </div>
-              <div className="input-group">
+              <div className="input-wrapper">
                 <label htmlFor="birth-date">Date of Birth</label>
                 <DatePicker
                   placeholder="Select a birth date"
@@ -174,7 +172,7 @@ export default function CreateEmployee() {
             </fieldset>
             <fieldset>
               <legend>COMPANY</legend>
-              <div className="input-group">
+              <div className="input-wrapper">
                 <label htmlFor="departments">Department</label>
                 <Select
                   styles={selectStyle}
@@ -192,7 +190,7 @@ export default function CreateEmployee() {
                   onClick={() => setDepartment({ label: '', value: '' })}
                 />
               </div>
-              <div className="input-group">
+              <div className="input-wrapper">
                 <label htmlFor="start-date">Start Date</label>
                 <DatePicker
                   placeholder="Select a start date"
@@ -215,7 +213,7 @@ export default function CreateEmployee() {
             </fieldset>
             <fieldset>
               <legend>ADDRESS</legend>
-              <div className="input-group">
+              <div className="input-wrapper">
                 <label htmlFor="street">Street</label>
                 <input
                   onChange={(e) => {
@@ -228,7 +226,7 @@ export default function CreateEmployee() {
                 />
                 <ClearButton value={street} onClick={() => setStreet('')} />
               </div>
-              <div className="input-group">
+              <div className="input-wrapper">
                 <label htmlFor="city">City</label>
                 <input
                   onChange={(e) => {
@@ -241,7 +239,7 @@ export default function CreateEmployee() {
                 />
                 <ClearButton value={city} onClick={() => setCity('')} />
               </div>
-              <div className="input-group">
+              <div className="input-wrapper">
                 <label htmlFor="states">State</label>
                 <Select
                   styles={selectStyle}
@@ -260,7 +258,7 @@ export default function CreateEmployee() {
                   onClick={() => setCountryState({ label: '', value: '' })}
                 />
               </div>
-              <div className="input-group">
+              <div className="input-wrapper">
                 <label htmlFor="zip-code">Zip Code</label>
                 <input
                   onChange={(e) => {
@@ -281,7 +279,7 @@ export default function CreateEmployee() {
             form="employee-form"
             data-testid="submit-button"
           >
-            Save
+            SAVE
           </button>
         </div>
       </ConfigProvider>

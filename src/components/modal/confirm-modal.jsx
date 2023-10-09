@@ -1,5 +1,4 @@
 import { useEffect, useRef } from 'react'
-import closeIcon from '../../assets/close.png'
 
 export default function ConfirmModal({ setIsModalOpened }) {
   const contentRef = useRef(null)
@@ -31,15 +30,17 @@ export default function ConfirmModal({ setIsModalOpened }) {
       }}
       className="modal-blocker"
       data-testid="modal-blocker"
+      aria-describedby="modal-description"
+      role="dialog"
     >
-      <div ref={contentRef} className="modal-content">
+      <div ref={contentRef} className="modal-content" id="modal-description">
         Employee Created!
         <button
           ref={buttonRef}
           className="close-button"
           data-testid="close-button"
         >
-          <img src={closeIcon} alt="Close" />
+          X
         </button>
       </div>
     </div>
