@@ -10,6 +10,8 @@ body {
 }
 
 #root {
+  height: fit-content;
+  min-height: 100vh;
   background-image: linear-gradient(
     to left top,
     #0c4e4e,
@@ -18,13 +20,8 @@ body {
     #bdc3b6,
     #efeee8
   );
-  height: 100vh;
   display: flex;
   justify-content: center;
-}
-
-button {
-  border: none;
 }
 
 h1 {
@@ -78,7 +75,7 @@ button {
   position: relative;
 }
 
-.input-wrapper:focus-within > button {
+.input-wrapper:focus-within > .clear-button {
   display: block;
 }
 
@@ -95,8 +92,14 @@ button {
   box-shadow: inset 1px 1px 4px rgba(161, 161, 161, 0.788);
 }
 
-.classic-input:focus-visible {
+.classic-input:focus-visible,
+.entries-select:focus-visible,
+.search-input:focus-visible {
   background-color: white;
+}
+
+.entries-wrapper .entries-select {
+  width: 70px;
 }
 
 label {
@@ -115,9 +118,84 @@ label {
   margin: 0 10px 0 0;
 }
 
+.head-row {
+  height: 30px;
+}
+
 .table-info {
   font-size: 15px;
   font-weight: 500;
+}
+
+.table-header span {
+  font-size: 15px;
+}
+
+button {
+  border: none;
+}
+
+.submit-button,
+.close-button,
+.page-button {
+  min-width: 30px;
+  line-height: 30px;
+  padding: 0;
+  background-color: #1b7575;
+  font-size: 14px;
+  color: white;
+  cursor: pointer;
+  box-shadow: 1px 2px 4px rgba(161, 161, 161, 0.788);
+}
+
+button:hover:not(.clear-button, .page-button-active) {
+  background-color: white;
+  color: #1b7575;
+}
+
+.clear-button {
+  display: none;
+  position: absolute;
+  top: 31px;
+  right: -18px;
+  z-index: 1;
+  padding: 4px;
+  cursor: pointer;
+  background-color: transparent;
+  box-shadow: none;
+}
+
+.clear-button img {
+  width: 10px;
+  height: 10px;
+}
+
+.submit-button {
+  display: block;
+  margin: auto;
+  width: 90px;
+}
+
+.numbered-wrapper .page-button-active {
+  background-color: #91908b;
+  color: white;
+  box-shadow: none;
+}
+
+.close-button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+
+.ellipsis-button {
+  font-weight: 700;
+}
+
+.entries-wrapper,
+.search-wrapper {
+  display: flex;
+  align-items: center;
 }
 
 .text-required {
@@ -136,7 +214,7 @@ label {
   background-color: #f7f7f7;
   text-decoration: none;
   font-size: 18px;
-  font-weight: 500;
+  font-weight: 700;
   line-height: 40px;
   color: #707070;
 }
@@ -196,46 +274,13 @@ label {
 .error-page p {
   font-weight: 500;
   background-color: #efeee8;
-  padding: 10px 10px 10px 10px;
+  padding: 10px;
   margin: auto;
 }
 
 .error-info {
   text-align: center;
   margin-top: 10px;
-}
-
-.clear-button {
-  display: none;
-  position: absolute;
-  top: 31px;
-  right: -18px;
-  z-index: 1;
-  padding: 4px;
-  cursor: pointer;
-  background-color: transparent;
-}
-
-.clear-button img {
-  width: 10px;
-  height: 10px;
-}
-
-.submit-button {
-  display: block;
-  margin: auto;
-  height: 30px;
-  width: 90px;
-  background-color: #1b7575;
-  color: white;
-  font-size: 14px;
-  box-shadow: 1px 2px 4px rgba(161, 161, 161, 0.788);
-}
-
-.submit-button:hover,
-.close-button:hover {
-  background-color: white;
-  color: #1b7575;
 }
 
 .modal-blocker {
@@ -261,18 +306,4 @@ label {
   background-color: #efeee8;
   box-shadow: 2px 2px 8px 0px rgb(28 28 28);
   font-weight: 500;
-}
-
-.close-button {
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  width: 30px;
-  height: 30px;
-  padding: 0 0 0 1px;
-  background-color: #1b7575;
-  cursor: pointer;
-  font-size: 14px;
-  color: white;
-  box-shadow: 1px 2px 4px rgba(161, 161, 161, 0.788);
 }
