@@ -3,7 +3,6 @@
  * @param { String } text Input text entered by the user
  * @returns { String } Formatted string
  */
-
 export function capitalize(text) {
   const wordsArray = text.split(' ')
   const formattedWordsArray = wordsArray.map((el) => {

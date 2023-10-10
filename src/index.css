@@ -131,8 +131,14 @@ label {
   font-size: 15px;
 }
 
+.body-row:hover > .body-cell {
+  background-color: #91908b;
+  color: white;
+}
+
 button {
   border: none;
+  user-select: none;
 }
 
 .submit-button,
@@ -304,6 +310,5 @@ button:hover:not(.clear-button, .page-button-active) {
   width: 350px;
   height: 130px;
   background-color: #efeee8;
-  box-shadow: 2px 2px 8px 0px rgb(28 28 28);
-  font-weight: 500;
+  box-shadow: 2px 2px 8px 1px rgb(28 28 28 / 65%);
 }
